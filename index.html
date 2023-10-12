@@ -1,13 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <link rel="icon" type="image/x-icon" href="./src/assets/icons/sun-favicon.svg">
+</head>
+
+<body>
+    <form id="weatherForm">
+        <input id="locationInput" type="text" placeholder="Enter location" value="toronto">
+        <button type="submit">Get Weather</button>
+    </form>
+
+    <div id="loading" style="display:none;">Loading...</div>
+    <div id="errorMsg" style="color: red; display: none;"></div>
+
+    <div id="weatherInfo">
+        <h2 id="location"></h2>
+        <img id="icon" alt="Weather Icon">
+        <div id="temperature"></div>
+        <div id="description"></div>
+        <div id="humidity"></div>
+        <div id="windSpeed"></div>
+        <div id="feelsLike"></div>
+        <div id="uvIndex"></div>
+        <div id="currentDate"></div>
+        <div id="currentTime"></div>
+        <div id="chanceOfRain"></div>
+        <div id="chanceOfSnow"></div>
+        <div id="hourlyForecast" class="hourly-forecast"></div> <!-- New hourly forecast div -->
+    </div>
+
+
+    <script type="module" src="./src/app.js"></script>
+</body>
+
 </html>
