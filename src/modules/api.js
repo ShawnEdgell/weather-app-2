@@ -43,7 +43,7 @@ export const processWeatherData = (data) => {
     const forecast = data.forecast.forecastday[0]; // Assuming you want data for the first day
 
     return {
-        location: `${data.location.name}, ${data.location.region}, ${data.location.country}`,
+        location: `${data.location.name}`,
         temperature: current.temp_c,
         feelsLike: current.feelslike_c,
         uv: current.uv,

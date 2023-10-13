@@ -9,27 +9,55 @@
 </head>
 <body>
     <div class="top-container">
-        <div id="weatherInfo">
-            <h2 id="location"></h2>
-            <img id="icon" alt="Weather Icon">
-            <div id="temperature"></div>
-            <div id="description"></div>
-            <div id="humidity"></div>
-            <div id="windSpeed"></div>
-            <div id="feelsLike"></div>
-            <div id="uvIndex"></div>
-            <div id="currentDate"></div>
-            <div id="currentTime"></div>
-            <div id="chanceOfRain"></div>
-            <div id="chanceOfSnow"></div>
+        <div class="weatherInfo">
 
-            <form id="weatherForm">
-                <input id="locationInput" type="text" placeholder="Enter location" value="Toronto">
-                <button type="submit">Get Weather</button>
-            </form>
+            <div class="top-left">
+                <div id="location"></div>
+                <div id="currentDate"></div>
+                <div id="currentTime"></div>
 
-            <div id="loading" style="display:none;">Loading...</div>
-            <div id="errorMsg" style="color: red; display: none;"></div>
+                <img id="icon" alt="Weather Icon">
+                <div id="temperature"></div>
+                <div id="description"></div>
+
+
+                <form id="weatherForm">
+                    <input id="locationInput" type="text" placeholder="Enter location" value="Toronto">
+                    <a id="weatherButton" href="#">
+                        <img id="searchButton" src="src/assets/icons/search.svg" alt="Get Weather" />
+                      </a>
+                </form>
+                <div id="loading" style="display:none;">Loading...</div>
+                <div id="errorMsg" style="color: red; display: none;"></div>
+            </div>
+
+            <div class="top-right">
+                <div class="weather-info">
+                  <div id="humidityLabel">Humidity:</div>
+                  <div id="humidityValue"></div>
+                </div>
+                <div class="weather-info">
+                  <div id="windSpeedLabel">Wind Speed:</div>
+                  <div id="windSpeedValue"></div>
+                </div>
+                <div class="weather-info">
+                  <div id="feelsLikeLabel">Feels Like:</div>
+                  <div id="feelsLikeValue"></div>
+                </div>
+                <div class="weather-info">
+                  <div id="uvIndexLabel">UV Index:</div>
+                  <div id="uvIndexValue"></div>
+                </div>
+                <div class="weather-info">
+                  <div id="rainLabel">Chance of Rain:</div>
+                  <div id="rainValue"></div>
+                </div>
+                <div class="weather-info">
+                  <div id="snowLabel">Chance of Snow:</div>
+                  <div id="snowValue"></div>
+                </div>
+              </div>
+
         </div> <!-- Close the "weatherInfo" div -->
     </div>
 

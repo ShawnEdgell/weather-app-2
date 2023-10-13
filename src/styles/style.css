@@ -5,14 +5,66 @@ body, h1, h2, p, div, img, form, input, button {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#weatherForm {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.weatherInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-left {
+  padding: 5%;
+}
+
+.top-right {
+  text-align: right;
   padding: 5%;
 }
 
 #icon {
   width: 80px;
   height: 80px;
+}
+
+#location {
+  font-size:  2rem;
+  font-weight: bold;
+}
+
+#locationInput {
+  height: 25px;
+}
+
+#weatherButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchButton {
+  height: 25px;
+}
+
+#temperature {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+#description {
+  font-weight: bold;
 }
 
 /* Styling for forecast toggle buttons */
@@ -38,7 +90,7 @@ input[type="radio"]:checked + label {
 }
 
 .forecast-toggle {
-  margin-top: 20px;
+  padding: 5%;
 }
 
 /* Styling for the forecast content */
@@ -89,7 +141,42 @@ input[type="radio"]:checked + label {
   text-align: center;
 }
 
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+#humidityLabel, #windSpeedLabel, 
+#feelsLikeLabel, #uvIndexLabel,
+#rainLabel, #snowLabel {
+  font-size: 0.8rem;
+}
+
+#humidityValue, #windSpeedValue, 
+#feelsLikeValue, #uvIndexValue,
+#rainValue, #snowValue {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Media query for tablets (768px width) */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 3%;
+  }
+}
+
+/* Media query for cell phones (480px width) */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 2%;
+  }
 }

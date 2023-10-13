@@ -1,22 +1,20 @@
 // ui.js
+// ui.js
 export const updateUI = (data) => {
     document.getElementById("location").textContent = data.location;
     document.getElementById("temperature").textContent = `${data.temperature}°C`;
-    document.getElementById("feelsLike").textContent = `Feels like: ${data.feelsLike}°C`;
-    document.getElementById("uvIndex").textContent = `UV Index: ${data.uv}`;
+    document.getElementById("feelsLikeValue").textContent = `${data.feelsLike}°C`;
+    document.getElementById("uvIndexValue").textContent = data.uv;
     document.getElementById("description").textContent = data.description;
-    document.getElementById("humidity").textContent = `Humidity: ${data.humidity}%`;
-    document.getElementById("windSpeed").textContent = `Wind speed: ${data.windSpeed} kph`;
+    document.getElementById("humidityValue").textContent = `${data.humidity}%`;
+    document.getElementById("windSpeedValue").textContent = `${data.windSpeed} kph`;
     document.getElementById("icon").setAttribute("src", data.icon);
 
     formatDateAndTime();
     displayHourlyForecast(data.hourly_forecast);
 
-    const chanceOfRain = data.daily_chance_of_rain;
-    const chanceOfSnow = data.daily_chance_of_snow;
-
-    document.getElementById("chanceOfRain").textContent = `Chance of Rain: ${chanceOfRain}%`;
-    document.getElementById("chanceOfSnow").textContent = `Chance of Snow: ${chanceOfSnow}%`;
+    document.getElementById("rainValue").textContent = `${data.daily_chance_of_rain}%`;
+    document.getElementById("snowValue").textContent = `${data.daily_chance_of_snow}%`;
 };
 
 const formatDateAndTime = () => {

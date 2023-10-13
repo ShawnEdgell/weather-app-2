@@ -4,7 +4,8 @@ import { updateUI } from './modules/ui.js';
 const defaultLocation = 'Toronto';
 let currentPage = 1;
 
-document.getElementById("weatherForm").addEventListener("submit", async (event) => {
+// Add a click event listener to the anchor element
+document.getElementById("weatherButton").addEventListener("click", async (event) => {
     event.preventDefault();
 
     document.getElementById("errorMsg").style.display = "none";
@@ -83,7 +84,6 @@ const update7DayForecast = (forecastData) => {
         console.error('Error fetching 7-day forecast:', error);
     }
 })();
-
 
 // Get the radio buttons and forecast content element
 const dailyRadio = document.getElementById("daily");
