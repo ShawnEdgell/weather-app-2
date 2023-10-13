@@ -4,17 +4,158 @@ body, h1, h2, p, div, img, form, input, button {
   padding: 0;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Exo', sans-serif;
+}
+
+
+.context {
+    width: 100%;
+    position: absolute;
+    top:50vh;
+    
+}
+
+.context h1{
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+.area{
+    background: #4e54c8;  
+    background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
+    width: 100%;
+    height:100vh;
+    
+   
+}
+
+.circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Add this line to make background non-clickable */
+}
+
+.circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    
+}
+
+.circles li:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(2){
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+@keyframes animate {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #f4f4f4;
-  background-size: cover;
+  background-color: rgb(31, 29, 29);
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  justify-content: space-between;
   color: white;
-  background-image: url("../../src/assets/images/background.jpg");
 }
 
 #weatherForm {
@@ -29,12 +170,15 @@ body {
 }
 
 .top-left {
-  padding: 4%;
+  padding: 4% 0 0 4%;
 }
 
 .top-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   text-align: right;
-  padding: 4%;
+  padding: 4% 4% 0 0;
 }
 
 #icon {
@@ -48,7 +192,13 @@ body {
 }
 
 #locationInput {
+  font-size: 1rem;
   height: 25px;
+  color: white;
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: none;
 }
 
 #weatherButton {
@@ -70,9 +220,21 @@ body {
   font-weight: bold;
 }
 
-/* Styling for forecast toggle buttons */
+
+.weather-icon {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  font-size: 8px;
+}
+
+.weather-icon img {
+  width: 20px;
+  height: 20px;
+}
+
 input[type="radio"] {
-  display: none; /* Hide the default radio buttons */
+  display: none;
 }
 
 label {
@@ -93,7 +255,12 @@ input[type="radio"]:checked + label {
 }
 
 .forecast-toggle {
-  padding: 4%;
+  padding: 0 4%;
+}
+
+.hourly-forecast img, .seven-day-forecast img {
+  width: 60px;
+  height: auto;
 }
 
 /* Styling for the forecast content */
@@ -101,7 +268,7 @@ input[type="radio"]:checked + label {
   display: none;
   margin-top: 20px;
   align-items: center;
-  height: 120px;
+  height: 200px;
   overflow-x: auto;
   width: 100%;
 }
@@ -109,6 +276,7 @@ input[type="radio"]:checked + label {
 /* Show the hourly forecast when the "show-hourly" class is present */
 .show-hourly .hourly-forecast {
   display: flex;
+  justify-content: center;
 }
 
 /* Hide the daily forecast when the "show-hourly" class is present */
@@ -124,15 +292,11 @@ input[type="radio"]:checked + label {
   text-align: center;
 }
 
-.hourly-forecast-item img {
-  width: 40px;
-  height: auto;
-}
-
 .seven-day-forecast {
   display: flex;
-  height: 120px;
-  justify-content: space-between;
+  align-items: center;
+  height: 200px;
+  justify-content: space-evenly;
   overflow-x: auto;
   white-space: nowrap;
   max-width: 100%;
@@ -164,7 +328,6 @@ input[type="radio"]:checked + label {
 }
 
 
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -172,14 +335,16 @@ input[type="radio"]:checked + label {
 
 /* Media query for tablets (768px width) */
 @media screen and (max-width: 768px) {
-  body {
-    padding: 3%;
+  .circles li {
+    width: 5%; /* Adjust the width for smaller screens */
+    padding-bottom: 5%; /* Maintain the aspect ratio */
   }
 }
 
 /* Media query for cell phones (480px width) */
 @media screen and (max-width: 480px) {
-  body {
-    padding: 2%;
+  .circles li {
+    width: 10%; /* Adjust the width for smaller screens */
+    padding-bottom: 10%; /* Maintain the aspect ratio */
   }
 }
