@@ -4,39 +4,6 @@ import { updateUI } from './modules/ui.js';
 const defaultLocation = 'Toronto';
 let currentPage = 1;
 
-function nextCarouselPage() {
-    const hourlyForecast = document.getElementById("hourlyForecast");
-    const numberOfPages = Math.ceil(hourlyForecast.children.length / 8);
-
-    if (currentPage < numberOfPages) {
-        currentPage++;
-        updateCarousel();
-    }
-}
-
-function prevCarouselPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        updateCarousel();
-    }
-}
-
-function updateCarousel() {
-    const hourlyForecast = document.getElementById("hourlyForecast");
-    const itemsPerPage = 8;
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    const items = hourlyForecast.getElementsByClassName("hourly-forecast-item");
-    for (let i = 0; i < items.length; i++) {
-        items[i].style.display = "none";
-    }
-
-    for (let i = startIndex; i < endIndex && i < items.length; i++) {
-        items[i].style.display = "block";
-    }
-}
-
 document.getElementById("weatherForm").addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -49,6 +16,7 @@ document.getElementById("weatherForm").addEventListener("submit", async (event) 
         const data = await fetchData(location);
         const processedData = processWeatherData(data);
         updateUI(processedData);
+        currentPage = 1; // Reset to the first page when new data is loaded
     } catch (error) {
         document.getElementById("errorMsg").innerText = error;
         document.getElementById("errorMsg").style.display = "block";
@@ -62,14 +30,6 @@ document.getElementById("weatherForm").addEventListener("submit", async (event) 
     const processedData = processWeatherData(data);
     updateUI(processedData);
 })();
-
-document.querySelector(".prev-button").addEventListener("click", () => {
-    prevCarouselPage();
-});
-
-document.querySelector(".next-button").addEventListener("click", () => {
-    nextCarouselPage();
-});
 
 const fetch7DayForecast = async (location) => {
     try {
@@ -123,3 +83,5 @@ const update7DayForecast = (forecastData) => {
         console.error('Error fetching 7-day forecast:', error);
     }
 })();
+
+
