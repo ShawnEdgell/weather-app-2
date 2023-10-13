@@ -1,8 +1,16 @@
+// app.js (main application)
 import { fetchData, processWeatherData } from './modules/api.js';
 import { updateUI } from './modules/ui.js';
+import createCarousel from './carousel.js'; // Import your carousel module
 
 const defaultLocation = 'Toronto';
 let currentPage = 1;
+
+// Initialize the carousel
+const slidesSelector = '.hourly-forecast-item';
+const prevButtonSelector = '.prev-button';
+const nextButtonSelector = '.next-button';
+createCarousel(slidesSelector, prevButtonSelector, nextButtonSelector);
 
 function nextCarouselPage() {
     const hourlyForecast = document.getElementById("hourlyForecast");
@@ -49,6 +57,8 @@ document.getElementById("weatherForm").addEventListener("submit", async (event) 
         const data = await fetchData(location);
         const processedData = processWeatherData(data);
         updateUI(processedData);
+        currentPage = 1;
+        updateCarousel();
     } catch (error) {
         document.getElementById("errorMsg").innerText = error;
         document.getElementById("errorMsg").style.display = "block";

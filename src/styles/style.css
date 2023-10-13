@@ -4,35 +4,18 @@ body, h1, h2, p, div, img, form, input, button {
   padding: 0;
 }
 
+.prev-button,
+.next-button {
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
 }
 
-#weather-app {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-}
-
-h1, h2 {
-  margin: 0;
-  color: #333;
-}
-
-p {
-  color: #777;
-}
-
-#localDate, #localTime {
-  font-size: 14px;
-}
-
-#location {
-  font-size: 24px;
+#icon {
+  width: 80px;
+  height: 80px;
 }
 
 #temperature {
@@ -41,99 +24,26 @@ p {
 
 #description {
   font-size: 20px;
-  text-transform: capitalize;
 }
 
-.weather-icon {
-  width: 80px;
-  height: 80px;
+.seven-day-forecast {
+  width: 100%;
+  overflow: hidden;
 }
 
-.input-container {
-  display: flex;
-  align-items: center;
-}
-
-#location-input {
-  flex: 1;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-#fetch-weather-btn {
-  background-color: #007BFF;
-  border: none;
-  color: #fff;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#fetch-weather-btn:hover {
-  background-color: #0056b3;
-}
-
-#error-message {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-#loading {
-  font-size: 18px;
-  color: #007BFF;
-  margin-top: 20px;
-}
-
-.weather-right .content-right {
-  margin-top: 20px;
-}
-
-.white-icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
-
-.label {
-  display: flex;
-  align-items: center;
-}
-
-.value {
-  font-size: 28px;
-  margin-top: 10px;
-}
-
-#loading p {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-/* ... (previous CSS code) ... */
-
-/* CSS for the updated hourly forecast structure */
 .hourly-forecast {
   display: flex;
-  overflow: hidden;
+  overflow-x: auto;
   width: 100%;
-  position: relative;
-  flex-wrap: nowrap; /* Prevent items from wrapping */
 }
 
 .hourly-forecast-item {
-  flex: 0 0 calc(100% / 8); /* Each cell takes up 1/9 of the container width */
+  flex: 0 0 calc(100% / 8);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding: 10px;
 }
 
 .hourly-forecast-item img {
@@ -141,43 +51,17 @@ p {
   height: auto;
 }
 
-/* CSS for carousel navigation buttons */
-.carousel-buttons {
+.seven-day-forecast {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
-.prev-button,
-.next-button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.prev-button:hover,
-.next-button:hover {
-  background-color: #0056b3;
-}
-
-.prev-button {
-  order: 1;
-}
-
-.next-button {
-  order: 3;
-}
-
-.bottom-container {
-  
+.forecast-day {
+  flex: 0 0 calc(100% / 8);
+  text-align: center;
 }
 
 @keyframes spin {
