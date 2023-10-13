@@ -34,7 +34,7 @@ document.getElementById("weatherForm").addEventListener("submit", async (event) 
 const fetch7DayForecast = async (location) => {
     try {
         const response = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=219a015ee939448aa0f195825231010&q=${location}&days=7&aqi=no&alerts=no`
+            `https://api.weatherapi.com/v1/forecast.json?key=219a015ee939448aa0f195825231010&q=${location}&days=7&aqi=no&alerts=no`
         );
         if (!response.ok) {
             throw new Error('Unable to fetch 7-day forecast data.');
