@@ -85,3 +85,16 @@ const update7DayForecast = (forecastData) => {
 })();
 
 
+// Get the radio buttons and forecast content element
+const dailyRadio = document.getElementById("daily");
+const hourlyRadio = document.getElementById("hourly");
+const forecastContent = document.getElementById("forecast-content");
+
+// Add event listeners to the radio buttons
+dailyRadio.addEventListener("change", () => {
+    forecastContent.classList.remove("show-hourly");
+});
+
+hourlyRadio.addEventListener("change", () => {
+    forecastContent.classList.add("show-hourly");
+});

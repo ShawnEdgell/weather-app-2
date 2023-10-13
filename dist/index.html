@@ -6,11 +6,11 @@
     <title>Weather App</title>
     
     <link rel="icon" type="image/x-icon" href="/weather-app-2/assets/sun-favicon-59884555.svg">
-  <script type="module" crossorigin src="/weather-app-2/assets/index-21ec2608.js"></script>
-  <link rel="stylesheet" href="/weather-app-2/assets/index-a3d20e4e.css">
+  <script type="module" crossorigin src="/weather-app-2/assets/index-c6f41bfc.js"></script>
+  <link rel="stylesheet" href="/weather-app-2/assets/index-1f7dd4ba.css">
 </head>
 <body>
-    <div class="bottom-container">
+    <div class="top-container">
         <div id="weatherInfo">
             <h2 id="location"></h2>
             <img id="icon" alt="Weather Icon">
@@ -32,22 +32,26 @@
 
             <div id="loading" style="display:none;">Loading...</div>
             <div id="errorMsg" style="color: red; display: none;"></div>
-
-            <div id="hourlyForecast" class="hourly-forecast">
-                <!-- 24 hourly-forecast-items will be added here dynamically -->
-            </div>
         </div> <!-- Close the "weatherInfo" div -->
     </div>
 
-    <div class="seven-day-forecast">
-        <!-- Forecast for each day will be added here dynamically -->
+    <div class="forecast-toggle">
+        <input type="radio" id="daily" name="forecast-toggle" checked>
+        <label for="daily">Daily</label>
+    
+        <input type="radio" id="hourly" name="forecast-toggle">
+        <label for="hourly">Hourly</label>
+    
+        <div class="forecast-content" id="forecast-content">
+            <div class="seven-day-forecast">
+                <!-- Daily forecast content here -->
+            </div>
+            <div id="hourlyForecast" class="hourly-forecast">
+                <!-- Hourly forecast content here -->
+            </div>
+        </div>
     </div>
 
-    <div class="carousel">
-        <div class="slides" id="hourlyForecast">
-          <!-- Your hourly forecast items will be added here dynamically -->
-        </div>
-      </div>
 
     
 </body>
