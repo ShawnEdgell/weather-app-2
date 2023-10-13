@@ -9,10 +9,9 @@ export const updateUI = (data) => {
     document.getElementById("windSpeed").textContent = `Wind speed: ${data.windSpeed} kph`;
     document.getElementById("icon").setAttribute("src", data.icon);
 
-    formatDateAndTime(); // Display date and time
-    displayHourlyForecast(data.hourly_forecast); // Display hourly forecast
+    formatDateAndTime();
+    displayHourlyForecast(data.hourly_forecast);
 
-    // Use the correct field names for chance of rain and snow from your API response
     const chanceOfRain = data.daily_chance_of_rain;
     const chanceOfSnow = data.daily_chance_of_snow;
 
@@ -29,7 +28,7 @@ const formatDateAndTime = () => {
     const minutes = currentDate.getMinutes();
     const ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours ? hours : 12;
 
     const timeString = `${hours}:${minutes < 10 ? '0' + minutes : minutes}${ampm}`;
 
@@ -39,20 +38,33 @@ const formatDateAndTime = () => {
 
 const displayHourlyForecast = (hourlyForecast) => {
     const forecastContainer = document.getElementById('hourlyForecast');
-    forecastContainer.innerHTML = ''; // Clear previous data
+    forecastContainer.innerHTML = '';
 
     hourlyForecast.forEach((hour) => {
         const hourElement = document.createElement('div');
         hourElement.classList.add('hourly-forecast-item');
 
-        // Format the time to your preferred display format
-        const time = new Date(hour.time).toLocaleTimeString('en-US', {
+        // Create an <img> element for the weather icon
+        const iconImg = document.createElement('img');
+        iconImg.setAttribute('src', hour.condition.icon);
+        iconImg.setAttribute('alt', 'Weather Icon');
+
+        // Create a <span> element for time
+        const timeSpan = document.createElement('span');
+        timeSpan.textContent = new Date(hour.time).toLocaleTimeString('en-US', {
             hour: 'numeric',
             minute: '2-digit',
             hour12: true,
         });
 
-        hourElement.textContent = `${time} - ${hour.temp_c}°C`;
+        // Create a <span> element for temperature
+        const temperatureSpan = document.createElement('span');
+        temperatureSpan.textContent = `${hour.temp_c}°C`;
+
+        // Append the icon, time, and temperature to the hourElement
+        hourElement.appendChild(iconImg);
+        hourElement.appendChild(timeSpan);
+        hourElement.appendChild(temperatureSpan);
 
         forecastContainer.appendChild(hourElement);
     });

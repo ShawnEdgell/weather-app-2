@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +7,41 @@
     <link rel="stylesheet" href="./src/styles/style.css">
     <link rel="icon" type="image/x-icon" href="./src/assets/icons/sun-favicon.svg">
 </head>
-
 <body>
-    <form id="weatherForm">
-        <input id="locationInput" type="text" placeholder="Enter location" value="toronto">
-        <button type="submit">Get Weather</button>
-    </form>
+    <div class="bottom-container">
+        <div id="weatherInfo">
+            <h2 id="location"></h2>
+            <img id="icon" alt="Weather Icon">
+            <div id="temperature"></div>
+            <div id="description"></div>
+            <div id="humidity"></div>
+            <div id="windSpeed"></div>
+            <div id="feelsLike"></div>
+            <div id="uvIndex"></div>
+            <div id="currentDate"></div>
+            <div id="currentTime"></div>
+            <div id="chanceOfRain"></div>
+            <div id="chanceOfSnow"></div>
 
-    <div id="loading" style="display:none;">Loading...</div>
-    <div id="errorMsg" style="color: red; display: none;"></div>
+            <form id="weatherForm">
+                <input id="locationInput" type="text" placeholder="Enter location" value="Toronto">
+                <button type="submit">Get Weather</button>
+            </form>
 
-    <div id="weatherInfo">
-        <h2 id="location"></h2>
-        <img id="icon" alt="Weather Icon">
-        <div id="temperature"></div>
-        <div id="description"></div>
-        <div id="humidity"></div>
-        <div id="windSpeed"></div>
-        <div id="feelsLike"></div>
-        <div id="uvIndex"></div>
-        <div id="currentDate"></div>
-        <div id="currentTime"></div>
-        <div id="chanceOfRain"></div>
-        <div id="chanceOfSnow"></div>
-        <div id="hourlyForecast" class="hourly-forecast"></div> <!-- New hourly forecast div -->
+            <div id="loading" style="display:none;">Loading...</div>
+            <div id="errorMsg" style="color: red; display: none;"></div>
+
+            <div id="hourlyForecast" class="hourly-forecast">
+                <!-- 24 hourly-forecast-items will be added here dynamically -->
+            </div>
+        </div> <!-- Close the "weatherInfo" div -->
     </div>
 
+    <div class="carousel-buttons">
+        <button class="prev-button">&#8249;</button>
+        <button class="next-button">&#8250;</button>
+    </div>
 
     <script type="module" src="./src/app.js"></script>
 </body>
-
 </html>

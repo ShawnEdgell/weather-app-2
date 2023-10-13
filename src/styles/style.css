@@ -1,25 +1,21 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+/* Reset margin and padding for all elements */
+body, h1, h2, p, div, img, form, input, button {
   margin: 0;
   padding: 0;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
 #weather-app {
-  max-width: 800px;
-  margin: 50px auto;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   display: flex;
-  flex-wrap: wrap;
-}
-
-.weather-left,
-.weather-right {
-  flex: 1;
-  padding: 20px;
 }
 
 h1, h2 {
@@ -36,13 +32,11 @@ p {
 }
 
 #location {
-  margin-top: 20px;
   font-size: 24px;
 }
 
 #temperature {
   font-size: 48px;
-  margin-top: 20px;
 }
 
 #description {
@@ -53,13 +47,11 @@ p {
 .weather-icon {
   width: 80px;
   height: 80px;
-  margin: 20px 0;
 }
 
 .input-container {
   display: flex;
   align-items: center;
-  margin-top: 20px;
 }
 
 #location-input {
@@ -74,8 +66,6 @@ p {
   border: none;
   color: #fff;
   padding: 10px 15px;
-  margin-left: 10px;
-  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -126,6 +116,68 @@ p {
   height: 50px;
   animation: spin 1s linear infinite;
   margin: 0 auto;
+}
+/* ... (previous CSS code) ... */
+
+/* CSS for the updated hourly forecast structure */
+.hourly-forecast {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  flex-wrap: nowrap; /* Prevent items from wrapping */
+}
+
+.hourly-forecast-item {
+  flex: 0 0 calc(100% / 8); /* Each cell takes up 1/9 of the container width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hourly-forecast-item img {
+  width: 40px;
+  height: auto;
+}
+
+/* CSS for carousel navigation buttons */
+.carousel-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prev-button,
+.next-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+.prev-button {
+  order: 1;
+}
+
+.next-button {
+  order: 3;
+}
+
+.bottom-container {
+  
 }
 
 @keyframes spin {
