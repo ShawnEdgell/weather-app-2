@@ -4,8 +4,6 @@ body, h1, h2, p, div, img, form, input, button {
   padding: 0;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
-
 *{
     margin: 0px;
     padding: 0px;

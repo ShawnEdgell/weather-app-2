@@ -3,7 +3,19 @@ const API_KEY = "219a015ee939448aa0f195825231010";
 
 let currentPage = 1;
 
-const fetchData = async (location = "Toronto") => {
+// Function to get the default location from local storage
+const getDefaultLocation = () => {
+    const defaultLocation = localStorage.getItem("defaultLocation");
+    return defaultLocation || "Toronto"; // Default to Toronto if no location is saved
+};
+
+// Function to set the default location in local storage
+const setDefaultLocation = (location) => {
+    localStorage.setItem("defaultLocation", location);
+};
+
+// Function to fetch weather data
+const fetchData = async (location) => {
     const url = `${API_BASE_URL}?key=${API_KEY}&q=${location}&days=1&aqi=no&alerts=no`;
 
     try {
@@ -21,6 +33,7 @@ const fetchData = async (location = "Toronto") => {
     }
 };
 
+// Event listener for the form submission
 document.getElementById("weatherForm").addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -44,6 +57,11 @@ document.getElementById("weatherForm").addEventListener("submit", async (event) 
         updateUI(processedData);
         currentPage = 1;
 
+        // Set the default location only if it's not already set
+        if (getDefaultLocation() !== location) {
+            setDefaultLocation(location);
+        }
+
         const forecastData = await fetch7DayForecast(location);
         update7DayForecast(forecastData);
 
@@ -57,23 +75,20 @@ document.getElementById("weatherForm").addEventListener("submit", async (event) 
     }
 });
 
+// Initialize the default location on page load
 window.addEventListener("load", () => {
+    document.getElementById("locationInput").value = "";
+    const defaultLocation = getDefaultLocation();
+    searchAndUpdate(defaultLocation);
+});
+
+// Event listener for the search button
+document.getElementById("searchButton").addEventListener("click", () => {
     document.getElementById("locationInput").value = "";
 });
 
-document.getElementById("searchButton").addEventListener("click", async () => {
-    const locationInputElement = document.getElementById("locationInput");
-    const locationValue = locationInputElement.value.trim();
-    const location = locationValue;
+// Rest of your code...
 
-    if (!location) {
-        document.getElementById("errorMsg").innerText = "Please provide a location.";
-        document.getElementById("errorMsg").style.display = "block";
-        return;
-    }
-
-    searchAndUpdate(location);
-});
 
 const searchAndUpdate = async (location) => {
     document.getElementById("errorMsg").style.display = "none";
@@ -104,10 +119,6 @@ const searchAndUpdate = async (location) => {
         document.getElementById("locationInput").value = "";
     }
 };
-
-window.addEventListener("load", () => {
-    searchAndUpdate("Toronto");
-});
 
 document.getElementById("searchButton").addEventListener("click", () => {
     document.getElementById("locationInput").value = "";
@@ -189,8 +200,8 @@ const updateUI = (data) => {
     formatDateAndTime();
     displayHourlyForecast(data.hourly_forecast);
 
-    document.getElementById("rainValue").textContent = '';
-    document.getElementById("snowValue").textContent = '';
+    document.getElementById("rainValue").textContent = `${data.daily_chance_of_rain}%`;
+    document.getElementById("snowValue").textContent = `${data.daily_chance_of_snow}%`;    
 };
 
 const formatDateAndTime = () => {

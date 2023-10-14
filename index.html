@@ -8,109 +8,96 @@
     <link rel="icon" type="image/x-icon" href="./src/assets/icons/sun-favicon.svg">
 </head>
 <body>
-
-    <div class="area" >
+    <div class="area">
         <ul class="circles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
         </ul>
-
-    <div class="main-container">
-    <div class="top-container">
-        <div class="weatherInfo">
-
-            <div class="top-left">
-                <div id="location"></div>
-                <div id="currentDate"></div>
-                <div id="currentTime"></div>
-
-                <img id="icon" alt="Weather Icon">
-                <div id="temperature"></div>
-                <div id="description"></div>
-
-
-                <form id="weatherForm">
-                    <input id="locationInput" type="text" placeholder="Enter location" value="Toronto">
-                    <a id="weatherButton" href="#">
-                        <img id="searchButton" src="src/assets/icons/search.svg" alt="Get Weather" />
-                      </a>
-                </form>
-                <div id="loading" style="display:none;">Loading...</div>
-                <div id="errorMsg" style="color: red; display: none;"></div>
+        <div class="main-container">
+            <div class="top-container">
+                <div class="weatherInfo">
+                    <div class="top-left">
+                        <div id="location"></div>
+                        <div id="currentDate"></div>
+                        <div id="currentTime"></div>
+                        <img id="icon" alt="Weather Icon">
+                        <div id="temperature"></div>
+                        <div id="description"></div>
+                        <form id="weatherForm">
+                            <input id="locationInput" type="text" placeholder="Enter location" value="Toronto">
+                            <a id="weatherButton" href="#">
+                                <img id="searchButton" src="src/assets/icons/search.svg" alt="Get Weather" />
+                            </a>
+                        </form>
+                        <div id="loading" style="display:none;">Loading...</div>
+                        <div id="errorMsg" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="top-right">
+                        <div class="weather-info">
+                            <div class="weather-icon">
+                                <img src="./src/assets/icons/humidity.svg" alt="Humidity Icon">
+                                <div id="humidityLabel">Humidity:</div>
+                            </div>
+                            <div id="humidityValue"></div>
+                        </div>
+                        <div class="weather-info">
+                            <div class="weather-icon">
+                                <img src="./src/assets/icons/wind-speed.svg" alt="Wind Speed Icon">
+                                <div id="windSpeedLabel">Wind Speed:</div>
+                            </div>
+                            <div id="windSpeedValue"></div>
+                        </div>
+                        <div class="weather-info">
+                            <div class="weather-icon">
+                                <img src="./src/assets/icons/feels-like.svg" alt="Feels Like Icon">
+                                <div id="feelsLikeLabel">Feels Like:</div>
+                            </div>
+                            <div id="feelsLikeValue"></div>
+                        </div>
+                        <div class="weather-info">
+                            <div class="weather-icon">
+                                <img src="./src/assets/icons/uv-index.svg" alt="UV Index Icon">
+                                <div id="uvIndexLabel">UV Index:</div>
+                            </div>
+                            <div id="uvIndexValue"></div>
+                        </div>
+                        <div class="weather-info">
+                            <div class="weather-icon">
+                                <img src="./src/assets/icons/chance-of-rain.svg" alt="Chance of Rain Icon">
+                                <div id="rainLabel">Chance of Rain:</div>
+                            </div>
+                            <div id="rainValue"></div>
+                        </div>
+                        <div class="weather-info">
+                            <div class="weather-icon">
+                                <img src="./src/assets/icons/chance-of-snow.svg" alt="Chance of Snow Icon">
+                                <div id="snowLabel">Chance of Snow:</div>
+                            </div>
+                            <div id="snowValue"></div>
+                        </div>
+                    </div>
+                </div> <!-- Close the "weatherInfo" div -->
             </div>
-
-            <div class="top-right">
-                <div class="weather-info">
-                    <div class="weather-icon">
-                        <img src="./src/assets/icons/humidity.svg" alt="Humidity Icon">
-                        <div id="humidityLabel">Humidity:</div>
+            <div class="forecast-toggle">
+                <div class="forecast-content" id="forecast-content">
+                    <div class="seven-day-forecast">
+                        <!-- Daily forecast content here -->
                     </div>
-                    <div id="humidityValue"></div>
-                </div>
-                <div class="weather-info">
-                    <div class="weather-icon">
-                        <img src="./src/assets/icons/wind-speed.svg" alt="Wind Speed Icon">
-                        <div id="windSpeedLabel">Wind Speed:</div>
+                    <div id="hourlyForecast" class="hourly-forecast">
+                        <!-- Hourly forecast content here -->
                     </div>
-                    <div id="windSpeedValue"></div>
                 </div>
-                <div class="weather-info">
-                    <div class="weather-icon">
-                        <img src="./src/assets/icons/feels-like.svg" alt="Feels Like Icon">
-                        <div id="feelsLikeLabel">Feels Like:</div>
-                    </div>
-                    <div id="feelsLikeValue"></div>
-                </div>
-                <div class="weather-info">
-                    <div class="weather-icon">
-                        <img src="./src/assets/icons/uv-index.svg" alt="UV Index Icon">
-                        <div id="uvIndexLabel">UV Index:</div>
-                    </div>
-                    <div id="uvIndexValue"></div>
-                </div>
-                <div class="weather-info">
-                    <div class="weather-icon">
-                        <img src="./src/assets/icons/chance-of-rain.svg" alt="Chance of Rain Icon">
-                        <div id="rainLabel">Chance of Rain:</div>
-                    </div>
-                    <div id="rainValue"></div>
-                </div>
-                <div class="weather-info">
-                    <div class="weather-icon">
-                        <img src="./src/assets/icons/chance-of-snow.svg" alt="Chance of Snow Icon">
-                        <div id="snowLabel">Chance of Snow:</div>
-                    </div>
-                    <div id="snowValue"></div>
-                </div>
-            </div>
-            
-
-        </div> <!-- Close the "weatherInfo" div -->
-    </div>
-
-    <div class="forecast-toggle">
-    
-        <div class="forecast-content" id="forecast-content">
-            <div class="seven-day-forecast">
-                <!-- Daily forecast content here -->
-            </div>
-            <div id="hourlyForecast" class="hourly-forecast">
-                <!-- Hourly forecast content here -->
             </div>
         </div>
-    </div>
-</div>
-    
-</div >
-
-    <script type="module" src="./src/app.js"></script>
+    </div >
+    <script defer type="module" src="./src/app.js"></script>
 </body>
 </html>
