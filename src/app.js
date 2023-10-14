@@ -1,41 +1,9 @@
 const API_BASE_URL = "https://api.weatherapi.com/v1/forecast.json";
-const API_KEY = "219a015ee939448aa0f195825231010"; // Replace with your WeatherAPI API key
+const API_KEY = "219a015ee939448aa0f195825231010";
 
 let currentPage = 1;
 
-document.getElementById("weatherForm").addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    document.getElementById("errorMsg").style.display = "none";
-    document.getElementById("loading").style.display = "block";
-
-    const location = document.getElementById("locationInput").value.trim();
-
-    try {
-        const data = await fetchData(location);
-        const processedData = processWeatherData(data);
-        updateUI(processedData);
-        currentPage = 1; // Reset to the first page when new data is loaded
-
-        // Fetch and update the 7-day forecast for the new location
-        const forecastData = await fetch7DayForecast(location);
-        update7DayForecast(forecastData);
-
-        // Update date, time, and location based on the new location
-        updateDateAndTime(location);
-    } catch (error) {
-        document.getElementById("errorMsg").innerText = error;
-        document.getElementById("errorMsg").style.display = "block";
-    } finally {
-        document.getElementById("loading").style.display = "none";
-    }
-});
-
-(async () => {
-    // No default location used here
-})();
-
-const fetchData = async (location) => {
+const fetchData = async (location = "Toronto") => {
     const url = `${API_BASE_URL}?key=${API_KEY}&q=${location}&days=1&aqi=no&alerts=no`;
 
     try {
@@ -52,6 +20,99 @@ const fetchData = async (location) => {
         throw error;
     }
 };
+
+document.getElementById("weatherForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    document.getElementById("errorMsg").style.display = "none";
+    document.getElementById("loading").style.display = "block";
+
+    const locationInputElement = document.getElementById("locationInput");
+    const locationValue = locationInputElement.value.trim();
+    const location = locationValue;
+
+    if (!location) {
+        document.getElementById("errorMsg").innerText = "Please provide a location.";
+        document.getElementById("errorMsg").style.display = "block";
+        document.getElementById("loading").style.display = "none";
+        return;
+    }
+
+    try {
+        const data = await fetchData(location);
+        const processedData = processWeatherData(data);
+        updateUI(processedData);
+        currentPage = 1;
+
+        const forecastData = await fetch7DayForecast(location);
+        update7DayForecast(forecastData);
+
+        updateDateAndTime(location);
+    } catch (error) {
+        document.getElementById("errorMsg").innerText = error;
+        document.getElementById("errorMsg").style.display = "block";
+    } finally {
+        document.getElementById("loading").style.display = "none";
+        locationInputElement.value = "";
+    }
+});
+
+window.addEventListener("load", () => {
+    document.getElementById("locationInput").value = "";
+});
+
+document.getElementById("searchButton").addEventListener("click", async () => {
+    const locationInputElement = document.getElementById("locationInput");
+    const locationValue = locationInputElement.value.trim();
+    const location = locationValue;
+
+    if (!location) {
+        document.getElementById("errorMsg").innerText = "Please provide a location.";
+        document.getElementById("errorMsg").style.display = "block";
+        return;
+    }
+
+    searchAndUpdate(location);
+});
+
+const searchAndUpdate = async (location) => {
+    document.getElementById("errorMsg").style.display = "none";
+    document.getElementById("loading").style.display = "block";
+
+    if (!location) {
+        document.getElementById("errorMsg").innerText = "Please provide a location.";
+        document.getElementById("errorMsg").style.display = "block";
+        document.getElementById("loading").style.display = "none";
+        return;
+    }
+
+    try {
+        const data = await fetchData(location);
+        const processedData = processWeatherData(data);
+        updateUI(processedData);
+        currentPage = 1;
+
+        const forecastData = await fetch7DayForecast(location);
+        update7DayForecast(forecastData);
+
+        updateDateAndTime(location);
+    } catch (error) {
+        document.getElementById("errorMsg").innerText = error;
+        document.getElementById("errorMsg").style.display = "block";
+    } finally {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("locationInput").value = "";
+    }
+};
+
+window.addEventListener("load", () => {
+    searchAndUpdate("Toronto");
+});
+
+document.getElementById("searchButton").addEventListener("click", () => {
+    document.getElementById("locationInput").value = "";
+});
+
 
 const fetch7DayForecast = async (location) => {
     try {
@@ -98,7 +159,7 @@ const update7DayForecast = (forecastData) => {
 
 const processWeatherData = (data) => {
     const current = data.current;
-    const forecast = data.forecast.forecastday[0]; // Assuming you want data for the first day
+    const forecast = data.forecast.forecastday[0];
 
     return {
         location: `${data.location.name}`,
@@ -128,8 +189,8 @@ const updateUI = (data) => {
     formatDateAndTime();
     displayHourlyForecast(data.hourly_forecast);
 
-    document.getElementById("rainValue").textContent = `${data.daily_chance_of_rain}%`;
-    document.getElementById("snowValue").textContent = `${data.daily_chance_of_snow}%`;
+    document.getElementById("rainValue").textContent = '';
+    document.getElementById("snowValue").textContent = '';
 };
 
 const formatDateAndTime = () => {
@@ -153,74 +214,49 @@ const displayHourlyForecast = (hourlyForecast) => {
     const forecastContainer = document.getElementById('hourlyForecast');
     forecastContainer.innerHTML = '';
 
-    // Get the current date and time
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
     const currentMinute = currentDate.getMinutes();
 
-    // Calculate the next hour based on the current time
     let nextHour = currentHour + 1;
     if (currentMinute < 1) {
         nextHour = currentHour;
     }
 
     hourlyForecast.forEach((hour) => {
-        // Check if the hour matches the nextHour
         const hourTimestamp = hour.time_epoch * 1000;
         const hourDate = new Date(hourTimestamp);
         const hourValue = hourDate.getHours();
 
-        // Only display forecast data for the next hour and beyond
         if (hourValue >= nextHour) {
             const hourElement = document.createElement('div');
             hourElement.classList.add('hourly-forecast-item');
 
-            // Create an <img> element for the weather icon
             const iconImg = document.createElement('img');
             iconImg.setAttribute('src', hour.condition.icon);
             iconImg.setAttribute('alt', 'Weather Icon');
 
-            // Format the time as HH:MM AM/PM
             const formattedTime = `${hourValue % 12}:${hourValue % 12 === 0 ? '00' : '00'} ${hourValue >= 12 ? 'PM' : 'AM'}`;
 
-            // Create a <span> element for time
             const timeSpan = document.createElement('span');
             timeSpan.textContent = formattedTime;
 
-            // Create a <span> element for temperature
             const temperatureSpan = document.createElement('span');
             temperatureSpan.textContent = `${hour.temp_c}°C`;
 
-            // Append the icon, time, and temperature to the hourElement
             hourElement.appendChild(iconImg);
             hourElement.appendChild(timeSpan);
             hourElement.appendChild(temperatureSpan);
-
-            // Append the hourly forecast item to the container
             forecastContainer.appendChild(hourElement);
 
-            // Increment nextHour for the next iteration
             nextHour++;
         }
     });
 };
 
-// Get the radio buttons and forecast content element
-const dailyRadio = document.getElementById("daily");
-const hourlyRadio = document.getElementById("hourly");
 const forecastContent = document.getElementById("forecast-content");
 
-// Add event listeners to the radio buttons
-dailyRadio.addEventListener("change", () => {
-    forecastContent.classList.remove("show-hourly");
-});
-
-hourlyRadio.addEventListener("change", () => {
-    forecastContent.classList.add("show-hourly");
-});
-
 const updateDateAndTime = (location) => {
-    // Fetch data for the selected location to get its current time
     fetch(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}`)
     .then((response) => response.json())
     .then((data) => {
@@ -243,3 +279,4 @@ const updateDateAndTime = (location) => {
         console.error(`Error fetching date and time data for ${location}: ${error.message}`);
     });
 };
+
