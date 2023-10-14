@@ -1,25 +1,24 @@
 /* Reset margin and padding for all elements */
-body, h1, h2, p, div, img, form, input, button {
+* {
   margin: 0;
   padding: 0;
 }
 
-*{
-    margin: 0px;
-    padding: 0px;
-}
-
 body{
-    font-family: 'Exo', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  color: white;
 }
 
 .main-container {
-  padding: 5%;
   display: flex;
+  height: 100%;
   flex-direction: column;
+  justify-content: space-between;
 }
-
-
 
 .context {
     width: 100%;
@@ -39,8 +38,6 @@ body{
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
     width: 100%;
     height:100vh;
-    
-   
 }
 
 .circles {
@@ -50,7 +47,7 @@ body{
   width: 100%;
   height: 100%;
   overflow: hidden;
-  pointer-events: none; /* Add this line to make background non-clickable */
+  pointer-events: none;
 }
 
 .circles li{
@@ -61,8 +58,7 @@ body{
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
     animation: animate 25s linear infinite;
-    bottom: -150px;
-    
+    bottom: -150px; 
 }
 
 .circles li:nth-child(1){
@@ -153,20 +149,9 @@ body{
     }
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: rgb(31, 29, 29);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  color: white;
-}
-
 #weatherForm {
-  margin-top: 20px;
+  margin-top: 10%;
   display: flex;
-  align-items: center;
 }
 
 .weatherInfo {
@@ -174,12 +159,16 @@ body {
   justify-content: space-between;
 }
 
+.top-left {
+  margin: 5% 0 0 5%;
+}
+
 .top-right {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1.5em;
   text-align: right;
-
+  margin: 5% 5% 0 0;
 }
 
 #icon {
@@ -188,7 +177,7 @@ body {
 }
 
 #location {
-  font-size:  2rem;
+  font-size:  2.5rem;
   font-weight: bold;
 }
 
@@ -197,6 +186,7 @@ body {
   height: 25px;
   color: white;
   background-color: transparent;
+  margin-top: 5%;
   border-top: none;
   border-right: none;
   border-left: none;
@@ -206,6 +196,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#currentTime {
+  margin-bottom: 5%;
 }
 
 #searchButton {
@@ -220,7 +214,6 @@ body {
 #description {
   font-weight: bold;
 }
-
 
 .weather-icon {
   display: flex;
@@ -238,28 +231,6 @@ input[type="radio"] {
   display: none;
 }
 
-label {
-  display: none;
-  font-size: 16px;
-  margin-right: 10px;
-  cursor: pointer;
-  border: 1px solid #666;
-  border-radius: 5px;
-  background-color: #666;
-}
-
-/* Styling for the selected radio button label */
-input[type="radio"]:checked + label {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-.seven-day-forecast img {
-  width: 60px;
-  height: auto;
-}
-
 .hourly-forecast {
 display: none;
 }
@@ -267,28 +238,23 @@ display: none;
 .seven-day-forecast {
   display: flex;
   justify-content: space-between;
+  margin: 0 5% 5%;
 }
 
 .forecast-day {
   text-align: center;
 }
 
-.weather-info {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
 #humidityLabel, #windSpeedLabel, 
 #feelsLikeLabel, #uvIndexLabel,
-#rainLabel, #snowLabel {
-  font-size: 0.8rem;
+#rainLabel, #snowLabel, .low-temperature {
+  font-size: 1rem;
 }
 
 #humidityValue, #windSpeedValue, 
 #feelsLikeValue, #uvIndexValue,
-#rainValue, #snowValue {
-  font-size: 1.6rem;
+#rainValue, #snowValue, .high-temperature {
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
@@ -299,10 +265,33 @@ display: none;
 }
 
 /* Media query for tablets (768px width) */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 810px) {
   .circles li {
     width: 5%; /* Adjust the width for smaller screens */
   }
+  .top-left {
+    margin: 6% 0 0 6%;
+  }
+  
+  .top-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    text-align: right;
+    margin: 6% 6% 0 0;
+  }
+
+  .seven-day-forecast {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 6% 6%;
+    max-width: 100%; /* Ensure it reaches the max width of the main container */
+  }
+
+  .main-container {
+    justify-content: space-around;
+  }
+  
 }
 
 /* Media query for cell phones (480px width) */
@@ -310,4 +299,60 @@ display: none;
   .circles li {
     width: 10%; /* Adjust the width for smaller screens */
   }
+
+  .main-container {
+    justify-content: space-between;
+  }
+
+  #humidityLabel, #windSpeedLabel, 
+  #feelsLikeLabel, #uvIndexLabel,
+  #rainLabel, #snowLabel {
+  font-size: 0.8rem;
+  }
+
+  #humidityValue, #windSpeedValue, 
+  #feelsLikeValue, #uvIndexValue,
+  #rainValue, #snowValue {
+  font-size: 1.4rem;
+  font-weight: bold;
+  }
+
+  .high-temperature {
+    font-size: 1rem;
+  }
+
+  .low-temperature {
+    font-size: 0.8rem;
+  }
+
+  #temperature {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  #location {
+    font-size:  2.5rem;
+    font-weight: bold;
+  }
+
+  #locationInput {
+    font-size: 0.8rem;
+  }
+
+  #forecast-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50%;
+  }
+
+  .weather-icon img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .forecast-day-icon img {
+    width: 50px;
+    height: 50px
+  }
+
 }

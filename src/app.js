@@ -149,24 +149,25 @@ const update7DayForecast = (forecastData) => {
         forecastElement.classList.add('forecast-day');
 
         const date = new Date(day.date);
-        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
+        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' }); // Use 'short' for abbreviated day names
         const iconUrl = day.day.condition.icon;
-        const maxTemp = day.day.maxtemp_c;
-        const minTemp = day.day.mintemp_c;
+        const maxTemp = Math.round(day.day.maxtemp_c); // Round to the nearest whole number
+        const minTemp = Math.round(day.day.mintemp_c); // Round to the nearest whole number
 
         forecastElement.innerHTML = `
+            <div class="day-name">${dayOfWeek}</div>
             <div class="forecast-day-icon">
-                <img src="${iconUrl}" alt="Weather Icon">
-            </div>
-            <div class="forecast-day-info">
-                <div class="forecast-day-name">${dayOfWeek}</div>
-                <div class="forecast-day-temp">${maxTemp}°C / ${minTemp}°C</div>
+            <img src="${iconUrl}" alt="Weather Icon">
+            <div class="high-temperature">${maxTemp}°C</div>
+            <div class="low-temperature">${minTemp}°C</div>
             </div>
         `;
 
         forecastContainer.appendChild(forecastElement);
     });
 };
+
+
 
 const processWeatherData = (data) => {
     const current = data.current;
@@ -189,8 +190,8 @@ const processWeatherData = (data) => {
 
 const updateUI = (data) => {
     document.getElementById("location").textContent = data.location;
-    document.getElementById("temperature").textContent = `${data.temperature}°C`;
-    document.getElementById("feelsLikeValue").textContent = `${data.feelsLike}°C`;
+    document.getElementById("temperature").textContent = `${Math.round(data.temperature)}°C`; // Round temperature
+    document.getElementById("feelsLikeValue").textContent = `${Math.round(data.feelsLike)}°C`; // Round feels like temperature
     document.getElementById("uvIndexValue").textContent = data.uv;
     document.getElementById("description").textContent = data.description;
     document.getElementById("humidityValue").textContent = `${data.humidity}%`;
