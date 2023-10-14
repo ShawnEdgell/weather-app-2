@@ -300,9 +300,6 @@ display: none;
     width: 10%; /* Adjust the width for smaller screens */
   }
 
-  .main-container {
-    justify-content: space-between;
-  }
 
   #humidityLabel, #windSpeedLabel, 
   #feelsLikeLabel, #uvIndexLabel,
@@ -342,7 +339,6 @@ display: none;
   #forecast-content {
     display: flex;
     flex-direction: column;
-    margin-bottom: 50%;
   }
 
   .weather-icon img {
