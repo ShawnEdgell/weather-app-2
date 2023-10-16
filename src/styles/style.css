@@ -270,7 +270,7 @@ display: none;
     width: 5%; /* Adjust the width for smaller screens */
   }
   .top-left {
-    margin: 6% 0 0 6%;
+    margin: 7% 0 0 7%;
   }
   
   .top-right {
@@ -278,13 +278,13 @@ display: none;
     flex-direction: column;
     gap: 1.5em;
     text-align: right;
-    margin: 6% 6% 0 0;
+    margin: 6% 7% 0 0;
   }
 
   .seven-day-forecast {
     display: flex;
     justify-content: space-between;
-    margin: 0 6% 6%;
+    margin: 0 7% 7%;
     max-width: 100%; /* Ensure it reaches the max width of the main container */
   }
 
@@ -313,6 +313,7 @@ display: none;
   font-size: 1.4rem;
   font-weight: bold;
   }
+  
 
   .high-temperature {
     font-size: 1rem;
@@ -347,8 +348,8 @@ display: none;
   }
 
   .forecast-day-icon img {
-    width: 50px;
-    height: 50px
+    width: 40px;
+    height: 40px
   }
 
 }
